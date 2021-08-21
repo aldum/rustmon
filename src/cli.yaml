@@ -1,0 +1,62 @@
+name: rustmon
+version: "0.1.0"
+author: Rick Henry <rickhenry@rickhenry.dev>
+about: Automatically restarts a script when files change on a path
+args:
+  - SCRIPT:
+      about: The script file to run
+      index: 1
+      required: true
+  - extensions:
+      short: e
+      long: ext
+      value_name: EXTENSIONS
+      about: Additional file extensions to watch, separated by commas for multiple
+      multiple_values: true
+      use_delimiter: true
+      require_delimiter: true
+  - recursive:
+      short: r
+      long: recursive
+      about: Set whether watches should be recursive or not
+  - watch:
+      short: w
+      long: watch
+      multiple_values: true
+      value_name: PATHS
+      about: Paths to watch, separated by commas for multiple
+      use_delimiter: true
+      require_delimiter: true
+  - exec:
+      short: x
+      long: exec
+      takes_value: true
+      value_name: BIN
+      about: Executable to run script, i.e. -x "/usr/bin/python"
+  - delay:
+      short: d
+      long: delay
+      takes_value: true
+      default_value: "10"
+      about: "Delay time in seconds between accepting new events"
+  - ignore_patterns:
+      short: i
+      long: ignore
+      takes_value: true
+      value_name: PATTERN
+      multiple_values: true
+      use_delimiter: true
+      require_delimiter: true
+      about: Ignore files using regex patterns, separated by commas (you may want to enclose them in quotes)
+  - verbose:
+      short: v
+      long: verbose
+      about: More info about events. -v shows file that causes restart, -vv shows why
+        restart occurred, -vvv shows why a restart didn't occur after a file change
+      multiple_occurrences: true
+
+
+
+
+
+
