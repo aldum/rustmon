@@ -1,0 +1,59 @@
+name: Rust
+
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            cross: false
+            artifact_name: rustmon
+            asset_name: rustmon-linux-x86_64
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            cross: true
+            artifact_name: rustmon
+            asset_name: rustmon-linux-aarch64
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            cross: false
+            artifact_name: rustmon
+            asset_name: rustmon-macos-x86_64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            cross: false
+            artifact_name: rustmon
+            asset_name: rustmon-windows-x86_64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install appropriate toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+        target: ${{ matrix.target }}
+    - uses: actions-rs/cargo@v1
+      name: Build
+      with:
+        command: build
+        args: --target ${{ matrix.target }} --release --locked
+        use-cross: ${{ matrix.cross }}
+    - name: Upload binary to release
+      uses: svenstaro/upload-release-action@v1-release
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: target/release/${{ matrix.artifact_name }}
+        asset_name: ${{ matrix.asset_name }}
+        tag: ${{ github.ref }}
