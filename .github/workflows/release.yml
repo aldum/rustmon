@@ -31,8 +31,8 @@ jobs:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             cross: false
-            artifact_name: .\target\x86_64-pc-windows-msvc\release\rustmon
-            asset_name: rustmon-windows-x86_64
+            artifact_name: .\target\x86_64-pc-windows-msvc\release\rustmon.exe
+            asset_name: rustmon-windows-x86_64.exe
 
     runs-on: ${{ matrix.os }}
 
