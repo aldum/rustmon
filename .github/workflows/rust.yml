@@ -43,3 +43,9 @@ jobs:
         command: build
         args: --target ${{ matrix.target }}
         use-cross: ${{ matrix.cross }}
+    - uses: actions-rs/cargo@v1
+      name: Build
+      with:
+        command: test
+        args: --target ${{ matrix.target }}
+        use-cross: ${{ matrix.cross }}

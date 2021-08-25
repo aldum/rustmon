@@ -45,7 +45,13 @@ jobs:
         override: true
         target: ${{ matrix.target }}
     - uses: actions-rs/cargo@v1
-      name: Build
+      name: Test
+      with:
+        toolchain: stable
+        args: --target ${{ matrix.target }} --release --locked
+        use-cross: ${{ matrix.cross }}
+    - uses: actions-rs/cargo@v1
+      name: Build for Release
       with:
         command: build
         args: --target ${{ matrix.target }} --release --locked

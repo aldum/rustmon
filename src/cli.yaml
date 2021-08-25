@@ -1,5 +1,5 @@
 name: rustmon
-version: "0.1.0"
+version: "0.1.1"
 author: Rick Henry <rickhenry@rickhenry.dev>
 about: Automatically restarts a script when files change on a path
 args:
@@ -19,7 +19,7 @@ args:
       short: r
       long: recursive
       about: Set whether watches should be recursive or not
-  - watch:
+  - watches:
       short: w
       long: watch
       multiple_values: true
