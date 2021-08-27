@@ -462,7 +462,7 @@ dependencies = [
 
 [[package]]
 name = "rustmon"
-version = "0.1.2"
+version = "0.1.2-1"
 dependencies = [
  "clap",
  "colored",

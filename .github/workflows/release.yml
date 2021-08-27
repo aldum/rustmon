@@ -48,8 +48,9 @@ jobs:
       name: Test
       with:
         toolchain: stable
-        args: --target ${{ matrix.target }} --release --locked
+        args: --target ${{ matrix.target }} --locked
         use-cross: ${{ matrix.cross }}
+        command: test
     - uses: actions-rs/cargo@v1
       name: Build for Release
       with:
@@ -59,7 +60,6 @@ jobs:
     - name: Upload binary to release
       uses: svenstaro/upload-release-action@v1-release
       with:
-        override: true
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ${{ matrix.artifact_name }}
         asset_name: ${{ matrix.asset_name }}
